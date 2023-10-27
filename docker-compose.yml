@@ -1,0 +1,43 @@
+version: '3'
+services:
+ my-app:
+  image: adityapandey51/my-app:1.1
+  ports:
+  - 3000:3000
+ mongodb:
+  image: mongo
+  ports: 
+   - 27017:27017
+  environment: 
+   MONGO_INITDB_ROOT_USERNAME: root
+   MONGO_INITDB_ROOT_PASSWORD: example
+  volumes:
+   - mongo-data:/data/db
+ mongoUI:
+  image: mongo-express
+  ports:
+   - 8081:8081
+  environment:
+   ME_CONFIG_MONGODB_ADMINUSERNAME: root
+   ME_CONFIG_MONGODB_ADMINPASSWORD: example
+   ME_CONFIG_MONGODB_SERVER: mongodb 
+volumes:
+ mongo-data: 
+  driver: local
+#docker-compose -f compose_file_name up
+#docker0-compose -f compose_file_name down 
+#docker network rm network-name
+#above mentioned 2 are to run containers using docker compose
+#normally we can use 
+#docker pull
+#docker run -it/-d -p ports:ports --name name_for_container -e env_variables=something --net network name image_name
+#docker stop container id
+#docker rm container_id=>to remove container
+#docker rmi image_id/name =>to remove image
+#docker logs container_name/id |tail/head =>to get the logs
+#docker images -q =>gives ids of all images
+#docker rmi $(docker images -q)=>removes all images in one command
+#docker ps=>lists all running containers
+#docker ps -a=>lists all containers
+#docker images=>lists images
+#docker network ls=>lists all networks
